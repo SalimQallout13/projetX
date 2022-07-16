@@ -44,4 +44,9 @@ public class ClubController {
         uService.deleteClub(clubID);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/clubs/filterByName")
+    public ResponseEntity<List<Club>> getClubByName(@RequestParam String name) {
+        return new ResponseEntity<List<Club>>(uService.getClubByName(name), HttpStatus.FOUND);
+    }
 }

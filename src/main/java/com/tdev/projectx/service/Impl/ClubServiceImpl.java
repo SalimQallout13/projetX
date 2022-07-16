@@ -44,4 +44,9 @@ public class ClubServiceImpl implements ClubService {
         clubRepository.deleteById(clubID);
     }
 
+    @Override
+    public List<Club> getClubByName(String name) {
+        return clubRepository.findByNameContaining(name);
+    }
+
 }

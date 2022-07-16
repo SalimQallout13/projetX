@@ -41,4 +41,14 @@ public class ReservationClubServiceImpl implements ReservationClubService {
     public void deleteClub(Long reservationClubID) {
         reservationClubRepository.deleteById(reservationClubID);
     }
+
+    @Override
+    public List<ReservationClub> getReservationClubByUser(Long user_id) {
+        return reservationClubRepository.findByUser(user_id);
+    }
+
+    @Override
+    public List<ReservationClub> getReservationClubByClub(Long club_id) {
+        return reservationClubRepository.findByClub(club_id);
+    }
 }
