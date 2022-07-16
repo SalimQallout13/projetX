@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID;
+    private Long userid;
     private String name;
     private String email;
     private String password;
@@ -40,7 +40,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + userID +
+                "id=" + userid +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';

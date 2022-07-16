@@ -16,7 +16,7 @@ import java.util.List;
 public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clubID;
+    private Long clubid;
     private String name;
     private String img;
     private String address;

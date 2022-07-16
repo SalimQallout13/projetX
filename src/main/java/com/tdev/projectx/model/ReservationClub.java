@@ -8,16 +8,20 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-@Embeddable
+@Entity
 @Table(name = "reservation_club")
 public class ReservationClub {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_club_id", nullable = false)
+    private Long reservationClubID;
 
     @ManyToOne
-    @JoinColumn(name = "userID", insertable = false, updatable = false)
+    @JoinColumn(name = "userid", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "clubID", insertable = false, updatable = false)
+    @JoinColumn(name = "clubid", insertable = false, updatable = false)
     private Club club;
 
     @Column(name = "date", updatable = false)
