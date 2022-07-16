@@ -1,14 +1,10 @@
 package com.tdev.projectx.controller;
 
 import com.tdev.projectx.model.ReservationClub;
-import com.tdev.projectx.model.User;
 import com.tdev.projectx.repo.UserRepository;
 import com.tdev.projectx.service.ReservationClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ReservationClubController {
@@ -30,7 +26,7 @@ public class ReservationClubController {
     @PutMapping("/reservationClub/{reservationClubID}")
     public ReservationClub updateReservationClub(@PathVariable Long reservationClubID, @RequestBody ReservationClub reservationClub) {
         // System.out.println("Updating the club data for the id: " + id);
-        reservationClub.setReservationClubID(reservationClubID);
+        reservationClub.setReservationClub_id(reservationClubID);
         return rcService.updateReservation(reservationClub);
     }
 

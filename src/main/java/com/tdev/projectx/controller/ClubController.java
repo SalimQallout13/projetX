@@ -31,7 +31,7 @@ public class ClubController {
     @PutMapping("/club/{clubID}")
     public Club updateClub(@PathVariable Long clubID, @RequestBody Club club) {
         // System.out.println("Updating the club data for the id: " + id);
-        club.setClubid(clubID);
+        club.setClub_id(clubID);
         return uService.updateClub(club);
     }
 

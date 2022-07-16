@@ -14,14 +14,14 @@ public class ReservationClub {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_club_id", nullable = false)
-    private Long reservationClubID;
+    private Long reservationClub_id;
 
     @ManyToOne
-    @JoinColumn(name = "userid", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "clubid", insertable = false, updatable = false)
+    @JoinColumn(name = "club_id", insertable = false, updatable = false)
     private Club club;
 
     @Column(name = "date", updatable = false)

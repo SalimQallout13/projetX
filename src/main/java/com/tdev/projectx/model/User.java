@@ -16,15 +16,15 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userid;
+    private Long user_id;
     private String name;
     private String email;
     private String password;
 
     @ManyToMany
     @JoinTable(name = "reservation_club",
-            joinColumns = @JoinColumn( name = "userID"),
-            inverseJoinColumns = @JoinColumn( name = "clubID")
+            joinColumns = @JoinColumn( name = "user_id"),
+            inverseJoinColumns = @JoinColumn( name = "club_id")
     )
     private List<Club> clubs = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + userid +
+                "id=" + user_id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';

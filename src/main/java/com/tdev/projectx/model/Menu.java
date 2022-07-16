@@ -13,23 +13,20 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Club {
+public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long club_id;
+    private Long menu_id;
     private String name;
-    private String img;
-    private String address;
-    private String hours;
-    private float entryPrice;
-    private String description;
+    private String whiskey;
+    private String vodka;
+    private String champagne;
+    private String consommation;
+    private String entrée;
 
-    @ManyToMany
-    @JoinTable(name = "reservation_club",
-            joinColumns = @JoinColumn( name = "club_id"),
-            inverseJoinColumns = @JoinColumn( name = "user_id")
-    )
-    private List<User> users = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "club_id", insertable = false, updatable = false)
+    private Club club_id;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
