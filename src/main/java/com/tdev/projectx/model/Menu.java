@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +18,15 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long menu_id;
+    @NotBlank(message = "Name must not be empty")
     private String name;
+    @NotBlank(message = "Whiskey must not be empty")
     private String whiskey;
+    @NotBlank(message = "Vodka must not be empty")
     private String vodka;
+    @NotBlank(message = "Champagne must not be empty")
     private String champagne;
+    @NotBlank(message = "Consommation must not be empty")
     private String consommation;
     private String entrée;
 

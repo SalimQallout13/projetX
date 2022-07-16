@@ -3,41 +3,42 @@ package com.tdev.projectx.controller;
 import com.tdev.projectx.model.User;
 import com.tdev.projectx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class UserController {
-
     @Autowired
     private UserService uService;
 
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return uService.getUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<List<User>>(uService.getUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userID}")
-    public User getUser(@PathVariable Long userID) {
-        return uService.getUserByID(userID);
+    public ResponseEntity<User> getUser(@PathVariable Long userID) {
+        return new ResponseEntity<User>(uService.getUserByID(userID), HttpStatus.FOUND);
     }
 
     @PostMapping("/user")
-    public User addUser(@RequestBody User user) {
-        return uService.addUser(user);
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
+        return new ResponseEntity<User>(uService.addUser(user), HttpStatus.CREATED);
     }
 
     @PutMapping("/user/{userID}")
-    public User updateUser(@PathVariable Long userID, @RequestBody User user) {
-        // System.out.println("Updating the user data for the id: " + id);
+    public ResponseEntity<User> updateUser(@PathVariable Long userID,@Valid  @RequestBody User user) {
         user.setUser_id(userID);
-        return uService.updateUser(user);
+        return new ResponseEntity<User>(uService.updateUser(user), HttpStatus.OK);
     }
 
-
     @DeleteMapping("/user")
-    public String deleteUser(@RequestParam Long userID) {
+    public ResponseEntity<HttpStatus> deleteUser(@RequestParam Long userID) {
         uService.deleteUser(userID);
-        return "This user with id: " + userID + " has been successfully deleted";
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }

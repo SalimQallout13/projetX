@@ -3,8 +3,11 @@ package com.tdev.projectx.controller;
 import com.tdev.projectx.model.Club;
 import com.tdev.projectx.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,31 +17,31 @@ public class ClubController {
     private ClubService uService;
 
     @GetMapping("/clubs")
-    public List<Club> getClubs() {
-        return uService.getClubs();
+    public ResponseEntity<List<Club>> getClubs() {
+        return new ResponseEntity<List<Club>>(uService.getClubs(), HttpStatus.OK);
     }
 
     @GetMapping("/club/{clubID}")
-    public Club getClub(@PathVariable Long clubID) {
-        return uService.getClubByID(clubID);
+    public ResponseEntity<Club> getClub(@PathVariable Long clubID) {
+        return new ResponseEntity<Club>(uService.getClubByID(clubID), HttpStatus.FOUND);
     }
 
     @PostMapping("/club")
-    public Club addClub(@RequestBody Club club) {
-        return uService.addClub(club);
+    public ResponseEntity<Club> addClub(@Valid @RequestBody Club club) {
+        return new ResponseEntity<Club>(uService.addClub(club), HttpStatus.CREATED);
     }
 
     @PutMapping("/club/{clubID}")
-    public Club updateClub(@PathVariable Long clubID, @RequestBody Club club) {
+    public ResponseEntity<Club> updateClub(@PathVariable Long clubID, @Valid @RequestBody Club club) {
         // System.out.println("Updating the club data for the id: " + id);
         club.setClub_id(clubID);
-        return uService.updateClub(club);
+        return new ResponseEntity<Club>(uService.updateClub(club), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/club")
-    public String deleteClub(@RequestParam Long clubID) {
+    public ResponseEntity<HttpStatus> deleteClub(@RequestParam Long clubID) {
         uService.deleteClub(clubID);
-        return "This club with id: " + clubID + " has been successfully deleted";
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }

@@ -2,9 +2,12 @@ package com.tdev.projectx.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Setter
 @Getter
@@ -24,7 +27,8 @@ public class ReservationClub {
     @JoinColumn(name = "club_id", insertable = false, updatable = false)
     private Club club;
 
+    @NotNull(message = "Date must not be empty")
     @Column(name = "date", updatable = false)
-    private LocalDate date;
+    private Date date;
 
 }

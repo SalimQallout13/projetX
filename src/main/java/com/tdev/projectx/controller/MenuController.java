@@ -3,8 +3,11 @@ package com.tdev.projectx.controller;
 import com.tdev.projectx.model.Menu;
 import com.tdev.projectx.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,26 +17,26 @@ public class MenuController {
     private MenuService uService;
 
     @GetMapping("/menu/{menuID}")
-    public Menu getMenu(@PathVariable Long menuID) {
-        return uService.getMenuByID(menuID);
+    public ResponseEntity<Menu> getMenu(@PathVariable Long menuID) {
+        return new ResponseEntity<Menu>(uService.getMenuByID(menuID), HttpStatus.FOUND);
     }
 
     @PostMapping("/menu")
-    public Menu addMenu(@RequestBody Menu menu) {
-        return uService.addMenu(menu);
+    public ResponseEntity<Menu> addMenu(@Valid @RequestBody Menu menu) {
+        return new ResponseEntity<Menu>(uService.addMenu(menu), HttpStatus.CREATED);
     }
 
     @PutMapping("/menu/{menuID}")
-    public Menu updateMenu(@PathVariable Long menuID, @RequestBody Menu menu) {
+    public ResponseEntity<Menu> updateMenu(@PathVariable Long menuID,@Valid @RequestBody Menu menu) {
         // System.out.println("Updating the menu data for the id: " + id);
         menu.setMenu_id(menuID);
-        return uService.updateMenu(menu);
+        return new ResponseEntity<Menu>(uService.updateMenu(menu), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/menu")
-    public String deleteMenu(@RequestParam Long menuID) {
+    public ResponseEntity<HttpStatus> deleteMenu(@RequestParam Long menuID) {
         uService.deleteMenu(menuID);
-        return "This menu with id: " + menuID + " has been successfully deleted";
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }
