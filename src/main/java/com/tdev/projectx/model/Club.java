@@ -30,7 +30,7 @@ public class Club {
     @NotBlank(message = "Description must not be empty")
     private String description;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "reservation_club",
             joinColumns = @JoinColumn( name = "club_id"),
             inverseJoinColumns = @JoinColumn( name = "user_id")

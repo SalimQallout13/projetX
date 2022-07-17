@@ -1,8 +1,8 @@
 package com.tdev.projectx.model;
 
+import com.tdev.projectx.request.ReservationClubRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,15 +20,14 @@ public class ReservationClub {
     private Long reservationClub_id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "club_id", insertable = false, updatable = false)
+    @JoinColumn(name = "club_id")
     private Club club;
 
     @NotNull(message = "Date must not be empty")
     @Column(name = "date", updatable = false)
     private Date date;
-
 }

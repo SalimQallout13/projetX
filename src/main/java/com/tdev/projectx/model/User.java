@@ -27,7 +27,7 @@ public class User {
     @NotBlank(message = "Password should not be null")
     private String password;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "reservation_club",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "club_id"))

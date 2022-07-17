@@ -1,6 +1,8 @@
 package com.tdev.projectx.service;
 
+import com.tdev.projectx.model.Club;
 import com.tdev.projectx.model.ReservationClub;
+import com.tdev.projectx.model.User;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public interface ReservationClubService {
 
     void deleteClub(Long reservationClubID);
 
-    List<ReservationClub> getReservationClubByUser(Long user_id);
+    List<ReservationClub> getReservationClubByUser(String name);
 
-    List<ReservationClub> getReservationClubByClub(Long club_id);
+    List<ReservationClub> getReservationClubByClub(String name);
 }

@@ -1,6 +1,8 @@
 package com.tdev.projectx.service.Impl;
 
+import com.tdev.projectx.model.Club;
 import com.tdev.projectx.model.ReservationClub;
+import com.tdev.projectx.model.User;
 import com.tdev.projectx.repo.ReservationClubRepository;
 import com.tdev.projectx.service.ReservationClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,12 @@ public class ReservationClubServiceImpl implements ReservationClubService {
     }
 
     @Override
-    public List<ReservationClub> getReservationClubByUser(Long user_id) {
-        return reservationClubRepository.findByUser(user_id);
+    public List<ReservationClub> getReservationClubByUser(String name) {
+        return reservationClubRepository.findByUserName(name);
     }
 
     @Override
-    public List<ReservationClub> getReservationClubByClub(Long club_id) {
-        return reservationClubRepository.findByClub(club_id);
+    public List<ReservationClub> getReservationClubByClub(String name) {
+        return reservationClubRepository.findByClubName(name);
     }
 }

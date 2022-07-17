@@ -31,7 +31,7 @@ public class Menu {
     private String entrée;
 
     @OneToOne
-    @JoinColumn(name = "club_id", insertable = false, updatable = false)
+    @JoinColumn(name = "club_id")
     private Club club_id;
 
     @CreationTimestamp
