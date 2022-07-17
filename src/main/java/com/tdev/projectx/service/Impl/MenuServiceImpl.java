@@ -31,11 +31,19 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu updateMenu(Menu menu) {
+        boolean exists = menuRepository.existsById(menu.getMenu_id());
+        if (!exists) {
+            throw new IllegalStateException("The menu with id " + menu.getMenu_id() + " does not exists");
+        }
         return menuRepository.save(menu);
     }
 
     @Override
     public void deleteMenu(Long menuID) {
+        boolean exists = menuRepository.existsById(menuID);
+        if (!exists) {
+            throw new IllegalStateException("The menu with id " + menuID + " does not exists");
+        }
         menuRepository.deleteById(menuID);
     }
 

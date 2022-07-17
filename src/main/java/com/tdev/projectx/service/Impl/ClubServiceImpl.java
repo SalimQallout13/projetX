@@ -36,11 +36,19 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public Club updateClub(Club club) {
+        boolean exists = clubRepository.existsById(club.getClub_id());
+        if (!exists) {
+            throw new IllegalStateException("The menu with id " + club.getClub_id() + " does not exists");
+        }
         return clubRepository.save(club);
     }
 
     @Override
     public void deleteClub(Long clubID) {
+        boolean exists = clubRepository.existsById(clubID);
+        if (!exists) {
+            throw new IllegalStateException("The menu with id " + clubID + " does not exists");
+        }
         clubRepository.deleteById(clubID);
     }
 

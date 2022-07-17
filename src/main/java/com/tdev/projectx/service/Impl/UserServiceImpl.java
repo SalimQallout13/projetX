@@ -21,18 +21,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByID(Long userID) {
-        Optional<User> user = userRepository.findById(userID);
+    public User getUserByID(Long user_id) {
+        Optional<User> user = userRepository.findById(user_id);
         if (user.isPresent()) {
             return user.get();
         }
-        throw new RuntimeException("User not found for this id: " + userID);
+        throw new RuntimeException("User not found for this id: " + user_id);
     }
 
     @Override
     public User addUser(User user) {
         Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
-        if (userOptional.isPresent()){
+        if (userOptional.isPresent()) {
             throw new IllegalStateException("This email is taken");
         }
         return userRepository.save(user);
@@ -40,12 +40,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
+        boolean exists = userRepository.existsById(user.getUser_id());
+        if (!exists) {
+            throw new IllegalStateException("The user with id " + user.getUser_id() + " does not exists");
+        }
         return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Long userID) {
-        userRepository.deleteById(userID);
+    public void deleteUser(Long user_id) {
+        boolean exists = userRepository.existsById(user_id);
+        if (!exists) {
+            throw new IllegalStateException("The user with id " + user_id + " does not exists");
+        }
+        userRepository.deleteById(user_id);
     }
 
 }

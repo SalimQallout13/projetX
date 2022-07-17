@@ -36,11 +36,19 @@ public class ReservationClubServiceImpl implements ReservationClubService {
 
     @Override
     public ReservationClub updateReservation(ReservationClub reservationClub) {
+        boolean exists = reservationClubRepository.existsById(reservationClub.getReservationClub_id());
+        if (!exists) {
+            throw new IllegalStateException("The reservation with id " + reservationClub.getReservationClub_id() + " does not exists");
+        }
         return reservationClubRepository.save(reservationClub);
     }
 
     @Override
     public void deleteClub(Long reservationClubID) {
+        boolean exists = reservationClubRepository.existsById(reservationClubID);
+        if (!exists) {
+            throw new IllegalStateException("The reservation with id " + reservationClubID + " does not exists");
+        }
         reservationClubRepository.deleteById(reservationClubID);
     }
 
