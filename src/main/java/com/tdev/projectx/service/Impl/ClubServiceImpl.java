@@ -38,7 +38,7 @@ public class ClubServiceImpl implements ClubService {
     public Club updateClub(Club club) {
         boolean exists = clubRepository.existsById(club.getClub_id());
         if (!exists) {
-            throw new IllegalStateException("The menu with id " + club.getClub_id() + " does not exists");
+            throw new IllegalStateException("The club with id " + club.getClub_id() + " does not exists");
         }
         return clubRepository.save(club);
     }
@@ -47,13 +47,17 @@ public class ClubServiceImpl implements ClubService {
     public void deleteClub(Long clubID) {
         boolean exists = clubRepository.existsById(clubID);
         if (!exists) {
-            throw new IllegalStateException("The menu with id " + clubID + " does not exists");
+            throw new IllegalStateException("The club with id " + clubID + " does not exists");
         }
         clubRepository.deleteById(clubID);
     }
 
     @Override
     public List<Club> getClubByName(String name) {
+        List<Club> clubList = clubRepository.findByNameContaining(name);
+        if (clubList.isEmpty()) {
+            throw new IllegalStateException("The club with name " + name + " does not exists");
+        }
         return clubRepository.findByNameContaining(name);
     }
 

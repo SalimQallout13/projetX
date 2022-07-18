@@ -1,14 +1,12 @@
 package com.tdev.projectx.service.Impl;
 
-import com.tdev.projectx.model.Club;
 import com.tdev.projectx.model.ReservationClub;
-import com.tdev.projectx.model.User;
 import com.tdev.projectx.repo.ReservationClubRepository;
+import com.tdev.projectx.repo.UserRepository;
 import com.tdev.projectx.service.ReservationClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +16,6 @@ public class ReservationClubServiceImpl implements ReservationClubService {
 
     @Autowired
     private ReservationClubRepository reservationClubRepository;
-
 
     @Override
     public ReservationClub getReservationByID(Long reservationClubID) {
@@ -44,7 +41,7 @@ public class ReservationClubServiceImpl implements ReservationClubService {
     }
 
     @Override
-    public void deleteClub(Long reservationClubID) {
+    public void deleteReservationClub(Long reservationClubID) {
         boolean exists = reservationClubRepository.existsById(reservationClubID);
         if (!exists) {
             throw new IllegalStateException("The reservation with id " + reservationClubID + " does not exists");
@@ -54,11 +51,19 @@ public class ReservationClubServiceImpl implements ReservationClubService {
 
     @Override
     public List<ReservationClub> getReservationClubByUser(String name) {
+        List<ReservationClub> reservationClubList = reservationClubRepository.findByUserName(name);
+        if (reservationClubList.isEmpty()) {
+            throw new IllegalStateException("There is no reservation with name " + name);
+        }
         return reservationClubRepository.findByUserName(name);
     }
 
     @Override
     public List<ReservationClub> getReservationClubByClub(String name) {
+        List<ReservationClub> reservationClubList = reservationClubRepository.findByClubName(name);
+        if (reservationClubList.isEmpty()) {
+            throw new IllegalStateException("There is no reservation for the club " + name);
+        }
         return reservationClubRepository.findByClubName(name);
     }
 }

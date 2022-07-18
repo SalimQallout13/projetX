@@ -1,16 +1,16 @@
 package com.tdev.projectx.model;
 
-import com.tdev.projectx.request.ReservationClubRequest;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "reservation_club")
 public class ReservationClub {
@@ -30,4 +30,12 @@ public class ReservationClub {
     @NotNull(message = "Date must not be empty")
     @Column(name = "date", updatable = false)
     private Date date;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date created_at;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private Date updated_at;
 }

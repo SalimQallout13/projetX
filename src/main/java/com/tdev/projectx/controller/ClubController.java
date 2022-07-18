@@ -18,35 +18,34 @@ public class ClubController {
 
     @GetMapping("/clubs")
     public ResponseEntity<List<Club>> getClubs() {
-        return new ResponseEntity<List<Club>>(uService.getClubs(), HttpStatus.OK);
+        return new ResponseEntity<>(uService.getClubs(), HttpStatus.OK);
     }
 
     @GetMapping("/club/{clubID}")
     public ResponseEntity<Club> getClub(@PathVariable Long clubID) {
-        return new ResponseEntity<Club>(uService.getClubByID(clubID), HttpStatus.FOUND);
+        return new ResponseEntity<>(uService.getClubByID(clubID), HttpStatus.FOUND);
     }
 
     @PostMapping("/club")
     public ResponseEntity<Club> addClub(@Valid @RequestBody Club club) {
-        return new ResponseEntity<Club>(uService.addClub(club), HttpStatus.CREATED);
+        return new ResponseEntity<>(uService.addClub(club), HttpStatus.CREATED);
     }
 
     @PutMapping("/club/{clubID}")
     public ResponseEntity<Club> updateClub(@PathVariable Long clubID, @Valid @RequestBody Club club) {
-        // System.out.println("Updating the club data for the id: " + id);
         club.setClub_id(clubID);
-        return new ResponseEntity<Club>(uService.updateClub(club), HttpStatus.OK);
+        return new ResponseEntity<>(uService.updateClub(club), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/club")
     public ResponseEntity<HttpStatus> deleteClub(@RequestParam Long clubID) {
         uService.deleteClub(clubID);
-        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/clubs/filterByName")
     public ResponseEntity<List<Club>> getClubByName(@RequestParam String name) {
-        return new ResponseEntity<List<Club>>(uService.getClubByName(name), HttpStatus.FOUND);
+        return new ResponseEntity<>(uService.getClubByName(name), HttpStatus.FOUND);
     }
 }
